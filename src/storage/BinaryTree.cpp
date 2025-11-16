@@ -35,7 +35,8 @@ bool BinaryTree::insert(
         while (true) {
             auto diff = key.compare(c -> key);
             if (diff == 0) {
-                throw std::invalid_argument("Key already exists");
+                c -> value = value;
+                return true;
             } else if (diff > 0) {
                 if (c -> right) {
                     c = c -> right;
