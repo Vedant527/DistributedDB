@@ -19,21 +19,21 @@ public:
     explicit BinaryTree();
     ~BinaryTree() override = default;
 
-    bool set(const std::string& key, const std::string& value) override;
-    const std::optional<std::string> get(const std::string& key) override;
-    bool del(const std::string& key) override;
+    bool set(const std::string key, const std::string value) override;
+    const std::optional<std::string> get(const std::string key) override;
+    bool del(const std::string key) override;
 
 protected:
-    bool insert(const std::string& key, const std::string& value) override;
-    bool remove(const std::string& key) override;
-    const std::optional<std::string> search(const std::string& key) override;
+    bool insert(const std::string key, const std::string value) override;
+    bool remove(const std::string key) override;
+    const std::optional<std::string> search(const std::string key) override;
 
 private:
     std::shared_ptr<BinaryTreeNode> root;
     
     const std::shared_ptr<BinaryTreeNode> removeNode(
         std::shared_ptr<BinaryTreeNode> node,
-        const std::string& key,
+        const std::string key,
         bool& removed
     );
 };

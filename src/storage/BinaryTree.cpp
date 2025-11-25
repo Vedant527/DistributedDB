@@ -8,25 +8,25 @@ BinaryTree::BinaryTree() : root(nullptr) {}
 
 // PUBLIC METHODS
 
-bool BinaryTree::set(const std::string& key, const std::string& value) {
-    return insert(std::move(key), std::move(value));
+bool BinaryTree::set(const std::string key, const std::string value) {
+    return insert(key, value);
 }
 
-const std::optional<std::string> BinaryTree::get(const std::string& key) {
-    return search(std::move(key));
+const std::optional<std::string> BinaryTree::get(const std::string key) {
+    return search(key);
 }
 
-bool BinaryTree::del(const std::string& key) {
-    return remove(std::move(key));
+bool BinaryTree::del(const std::string key) {
+    return remove(key);
 }
 
 // PROTECTED METHODS
 
 bool BinaryTree::insert(
-    const std::string& key, 
-    const std::string& value
+    const std::string key, 
+    const std::string value
 ) {
-    std::shared_ptr<BinaryTreeNode> node = std::make_unique<BinaryTreeNode>(false, std::move(key), std::move(value));
+    std::shared_ptr<BinaryTreeNode> node = std::make_shared<BinaryTreeNode>(false, key, value);
 
     if (!size_) {
         root = node;
@@ -61,38 +61,34 @@ bool BinaryTree::insert(
     return true;
 }
 
-bool BinaryTree::remove(const std::string& key) {
+bool BinaryTree::remove(const std::string key) {
     bool removed = false;
     root = removeNode(root, key, removed);
     if (removed) size_--;
     return removed;
 }
 
-const std::optional<std::string> BinaryTree::search(const std::string& key) {
-    if (!size_) return std::nullopt;
-
+const std::optional<std::string> BinaryTree::search(const std::string key) {
     std::shared_ptr<BinaryTreeNode> c = root;
     while (c) {
-        auto diff = c -> key.compare(key);
+        int diff = key.compare(c->key);
         if (diff == 0) {
-            return c -> value;
+            return c->value;
         } else if (diff > 0) {
-            c = c -> right;
-            continue;
+            c = c->right;     
         } else {
-            c = c -> left;
-            continue;
+            c = c->left;
         }
     }
-
     return std::nullopt;
 }
+
 
 // PRIVATE METHODS
 
 const std::shared_ptr<BinaryTreeNode> BinaryTree::removeNode(
     std::shared_ptr<BinaryTreeNode> node,
-    const std::string& key,
+    const std::string key,
     bool& removed
 ) {
     if (!node) return nullptr;

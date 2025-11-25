@@ -20,17 +20,17 @@ public:
     explicit BTree(int t = 3);
     ~BTree() override = default;
 
-    bool set(const std::string& key, const std::string& value) override;
-    const std::optional<std::string> get(const std::string& key) override;
-    bool del(const std::string& key) override;
+    bool set(const std::string& key, const std::string value) override;
+    const std::optional<std::string> get(const std::string key) override;
+    bool del(const std::string key) override;
 
 private:
     std::shared_ptr<BTreeNode> root;
     size_t min_degree_;
 
-    void insertNonFull(std::shared_ptr<BTreeNode> node, const std::string& key, const std::string& value);
+    void insertNonFull(std::shared_ptr<BTreeNode> node, const std::string key, const std::string value);
     void splitChild(std::shared_ptr<BTreeNode> parent, int index, std::shared_ptr<BTreeNode> child);
-    std::optional<std::string> search(std::shared_ptr<BTreeNode> node, const std::string& key);
-    void remove(std::shared_ptr<BTreeNode> node, const std::string& key);
+    std::optional<std::string> search(std::shared_ptr<BTreeNode> node, const std::string key);
+    void remove(std::shared_ptr<BTreeNode> node, const std::string key);
     size_t size();
 };
