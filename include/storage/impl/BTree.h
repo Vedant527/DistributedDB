@@ -20,7 +20,7 @@ public:
     explicit BTree(int t = 3);
     ~BTree() override = default;
 
-    bool set(const std::string& key, const std::string value) override;
+    bool set(const std::string key, const std::string value) override;
     const std::optional<std::string> get(const std::string key) override;
     bool del(const std::string key) override;
 
